@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({super.key});
+  final String introduction;
+  final TextEditingController _introduction;
+  EditProfilePage({super.key, required String currentIntroduction, required this.introduction}) : _introduction = TextEditingController(text: introduction);
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +74,9 @@ class EditProfilePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _introduction,
+              decoration: const InputDecoration(
                 hintText: 'New bio',
                 hintStyle: TextStyle(color: Colors.grey),
               ),
@@ -83,7 +86,7 @@ class EditProfilePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Logic to save changes
-                  Navigator.pop(context);
+                  Navigator.pop(context, _introduction.text);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,

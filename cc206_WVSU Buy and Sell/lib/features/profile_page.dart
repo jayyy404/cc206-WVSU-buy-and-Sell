@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'edit_profile.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState  extends State<ProfilePage>{
+
+  String _introduction = 'Introduction about self';
+
+  void _navigateEditProfile() async{
+    final updatedIntroduction = await Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage(currentIntroduction: _introduction, introduction: '',),));
+    if (updatedIntroduction != null) {
+      setState(() {
+        _introduction = updatedIntroduction;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +49,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Text(
-              'Introduction about self',
+              _introduction,
               style: TextStyle(
                 color: Colors.grey[600],
               ),
@@ -42,14 +57,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const EditProfilePage(),
-                  ),
-                );
-              },
+              onPressed: _navigateEditProfile,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey[300],
                 foregroundColor: Colors.black,
@@ -66,3 +74,5 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
+
+

@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
     onPressed: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ProfilePage()),
+        MaterialPageRoute(builder: (context) => ProfilePage()),
       );
     },
     child: const Text('Go to User Profile'),
