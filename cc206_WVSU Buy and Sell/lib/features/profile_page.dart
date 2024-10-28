@@ -2,19 +2,31 @@ import 'package:flutter/material.dart';
 import 'edit_profile.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState  extends State<ProfilePage>{
-
+class _ProfilePageState extends State<ProfilePage> {
   String _introduction = 'Introduction about self';
+  String _userName = "User's name";
 
-  void _navigateEditProfile() async{
-    final updatedIntroduction = await Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage(currentIntroduction: _introduction, introduction: '',),));
-    if (updatedIntroduction != null) {
+  void _navigateEditProfile() async {
+    final updatedValues = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditProfilePage(
+          currentIntroduction: _introduction,
+          currentName: _userName, introduction: '',
+        ),
+      ),
+    );
+
+    if (updatedValues != null) {
       setState(() {
-        _introduction = updatedIntroduction;
+        _introduction = updatedValues['introduction'] ?? _introduction;
+        _userName = updatedValues['name'] ?? _userName;
       });
     }
   }
@@ -39,9 +51,9 @@ class _ProfilePageState  extends State<ProfilePage>{
               backgroundColor: Colors.grey,
             ),
             const SizedBox(height: 20),
-            const Text(
-              "User's name",
-              style: TextStyle(
+            Text(
+              _userName,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -74,5 +86,3 @@ class _ProfilePageState  extends State<ProfilePage>{
     );
   }
 }
-
-

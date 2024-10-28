@@ -26,12 +26,12 @@ flutter:
      - assets/logo.png
      - assets/Shopping bag.png
 
-  fonts:
-    - family: Raleway
-      fonts:
-        - asset: fonts/Raleway-Regular.ttf
-        - asset: fonts/Raleway-Italic.ttf
-          style: italic
-        - asset: fonts/Raleway-Bold.ttf
-          weight: 700
-        - asset: fonts/Raleway-Medium.ttf
+  # fonts:
+  #   - family: Raleway
+  #     fonts:
+  #       - asset: fonts/Raleway-Regular.ttf
+  #       - asset: fonts/Raleway-Italic.ttf
+  #         style: italic
+  #       - asset: fonts/Raleway-Bold.ttf
+  #         weight: 700
+  #       - asset: fonts/Raleway-Medium.ttf

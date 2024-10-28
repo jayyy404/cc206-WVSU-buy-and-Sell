@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatelessWidget {
-  final String introduction;
-  final TextEditingController _introduction;
-  EditProfilePage({super.key, required String currentIntroduction, required this.introduction}) : _introduction = TextEditingController(text: introduction);
+  final String currentIntroduction;
+  final String currentName;
+  final TextEditingController _introductionController;
+  final TextEditingController _nameController;
+
+  EditProfilePage({
+    super.key,
+    required this.currentIntroduction,
+    required this.currentName,
+    required String introduction,
+  })  : _introductionController = TextEditingController(text: currentIntroduction),
+        _nameController = TextEditingController(text: currentName);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +20,7 @@ class EditProfilePage extends StatelessWidget {
       backgroundColor: const Color(0xFFF9F4EF), // Light background color
       appBar: AppBar(
         title: const Text(
-          'Edit profile',
+          'Edit Profile',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -29,29 +38,6 @@ class EditProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Column(
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.white,
-                  ),
-                  const SizedBox(height: 10),
-                  TextButton(
-                    onPressed: () {
-                      // Logic for changing profile picture
-                    },
-                    child: const Text(
-                      'Change profile',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 30),
             const Text(
               'Name',
@@ -60,8 +46,9 @@ class EditProfilePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
                 hintText: 'New name',
                 hintStyle: TextStyle(color: Colors.grey),
               ),
@@ -75,7 +62,7 @@ class EditProfilePage extends StatelessWidget {
               ),
             ),
             TextField(
-              controller: _introduction,
+              controller: _introductionController,
               decoration: const InputDecoration(
                 hintText: 'New bio',
                 hintStyle: TextStyle(color: Colors.grey),
@@ -85,20 +72,21 @@ class EditProfilePage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Logic to save changes
-                  Navigator.pop(context, _introduction.text);
+                  Navigator.pop(context, {
+                    'introduction': _introductionController.text,
+                    'name': _nameController.text,
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 12, horizontal: 40),
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
                 child: const Text(
-                  'Complete',
+                  'Save Changes',
                   style: TextStyle(fontSize: 16),
                 ),
               ),
